@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+
+{% load render_partial %}
+
+{% block title %}
+<title>ارتباط با ما</title>
+{% endblock title %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-14 pt-8">
+  <div>
+    <p class="mb-4">جهت ارتباط با ما و ارسال نظرات و پیشنهادات خود می توانید از فرم زیر استفاده نمایید.</p>
+    {% render_partial 'sites.views.FeedbackView' %}
+  </div>
+  <div>
+    {% render_partial 'sites.views.WaysOfComunicarion' %}
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

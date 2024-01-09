@@ -1,0 +1,7 @@
+<div class="form-control w-full">
+    <form action='/feedback/' method='post'>
+        {{ form }}
+        {% csrf_token %}
+        <button type='submit' class="btn bg-stone-800 w-36 hover:bg-stone-900 text-white my-3">ارسال پیام</button>
+    </form>
+</div>

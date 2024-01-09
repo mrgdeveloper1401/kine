@@ -1,0 +1,13 @@
+<div>
+    <div class="swiper partners swiper-initialized swiper-horizontal swiper-rtl swiper-backface-hidden">
+      <div class="swiper-wrapper" id="swiper-wrapper-c296551ef67cdbd1" aria-live="polite">
+        {% for e in e_nemad %}
+        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 5" style="width: 101.8px; margin-left: 10px;">
+            <a href='{{ e.url }}'><img src="{{ e.image.url }}" alt=""></a>
+          </div>  
+        {% endfor %}
+
+      </div>
+    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+  
+  </div>

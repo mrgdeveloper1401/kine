@@ -1,0 +1,73 @@
+{% load static %}
+
+<section class="bg-white border-b px-4">
+    <div class="container mx-auto max-w-screen-xl">
+        <div class="flex justify-between items-center py-5">
+          <div class="lg:hidden leading-none z-10">
+            <div class="drawer">
+                <input id="my-drawer-4" type="checkbox" class="drawer-toggle">
+                <div class="drawer-content">
+                    <label for="my-drawer-4" class="swap swap-rotate drawer-button">
+
+                      <!-- this hidden checkbox controls the state -->
+                      <input type="checkbox">
+                      
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-black swap-off fill-current">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                        </svg>
+                        
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-black swap-on fill-current">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        
+                    </label> 
+                  </div> 
+                  <div class="drawer-side">
+                    <label for="my-drawer-4" class="drawer-overlay"></label>
+                    <ul class="menu p-4 w-80 h-full bg-base-200 text-base-content">
+                      <div class="drawer-content text-left">
+                          <label for="my-drawer-4" class="swap swap-rotate drawer-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                          </label> 
+                        </div> 
+                        <li><a class="hover:text-indigo-600" href="{% url "doctor:home" %}">صفحه اصلی</a></li>
+                        <li><a class="hover:text-indigo-600" href="reservationlist.html">لیست پزشکان</a></li>
+                        <li><a class="hover:text-indigo-600" href="reservation.html">رزرو نوبت</a></li>
+                        <li><a class="hover:text-indigo-600" href="bimeh.html">ثبت بیمه</a></li>
+                        <li><a class="hover:text-indigo-600" href="{% url "blog:all_posts" %}">وبلاگ</a></li>
+                        <li><a class="hover:text-indigo-600" href="about-us.html">درباره ما</a></li>
+                        <li><a class="hover:text-indigo-600" href="{% url "sites:contact_us" %}">تماس با ما</a></li>
+
+                    </ul>
+                  </div>
+              </div>
+        </div>
+          <div class="flex items-center gap-8">
+            <div>
+                <a href="{% url "doctor:home" %}"><img src="/static/images/logo.png" alt=""></a>
+            </div>
+            <div class="hidden lg:block">
+                <ul class="flex gap-x-8">
+                    <li><a class="hover:text-indigo-600" href="{% url "doctor:home" %}">صفحه اصلی</a></li>
+                    <li><a class="hover:text-indigo-600" href="{% url "doctor:all_doctor" %}">لیست پزشکان</a></li>
+                    <li><a class="hover:text-indigo-600" href="reservation.html">رزرو نوبت</a></li>
+                    <li><a class="hover:text-indigo-600" href="bimeh.html">ثبت بیمه</a></li>
+                    <li><a class="hover:text-indigo-600" href="{% url "blog:all_posts" %}">وبلاگ</a></li>
+                    <li><a class="hover:text-indigo-600" href="about-us.html">درباره ما</a></li>
+                    <li><a class="hover:text-indigo-600" href="{% url "sites:contact_us" %}">تماس با ما</a></li>
+                </ul>
+            </div>
+          </div>
+            <div class="border rounded-lg">
+                {% if request.user.is_authenticated %}
+                <a href="#" class="flex py-2.5 px-5 rounded-lg hover:text-white hover:bg-stone-800 hover:transition hover:duration-700 hover:ease-in-out">سلام {{ request.user }}</a>
+                {% else %}
+                <a href="{% url "accounts:login" %}" class="flex py-2.5 px-5 rounded-lg hover:text-white hover:bg-stone-800 hover:transition hover:duration-700 hover:ease-in-out">ورود | ثبت نام</a>
+                {% endif %}
+            </div>
+    
+        </div>
+    </div>
+  </section>
