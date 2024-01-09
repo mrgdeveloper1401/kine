@@ -1,9 +1,11 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.contrib import messages
 from .form import FeedbackForm
-from .models import Feedback, SiteSettings, PermisionSite
+from .models import Feedback, SiteSettings, PermisionSite, AboutUs, SciolAboutUs
 
 
 
@@ -65,4 +67,17 @@ class WaysOfComunicarion(View):
 
 class SliderComponenets(TemplateView):
     template_name = 'sites/slider.html'
-    
+
+
+class AboutUsView(ListView):
+    model = AboutUs
+    template_name = 'sites/about_us.html'
+    context_object_name = 'about_us'
+    queryset = get_object_or_404(AboutUs, is_active=True)
+
+
+class SciolAboutUsView(ListView):
+    model = SciolAboutUs
+    queryset = get_object_or_404(SciolAboutUs, is_active=True)
+    template_name = 'sites/sciol_about_us.html'
+    context_object_name = 'sciol_about_us'

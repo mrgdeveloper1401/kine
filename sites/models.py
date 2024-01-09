@@ -49,3 +49,32 @@ class PermisionSite(CreateAt, UpdateAt):
         db_table = 'permissions'
         verbose_name = _('permissions')
         verbose_name_plural = _('permissions')
+
+
+class AboutUs(CreateAt, UpdateAt):
+    title = models.CharField(_("title"), max_length=200)
+    image = models.ImageField(_("image"), upload_to='about-us/%Y/%M/%d', blank=True, null=True)
+    description = models.TextField()
+    is_active = models.BooleanField(_("is active"), default=True)
+    
+    def __str__(self) -> str:
+        return self.title
+    
+    class Meta:
+        db_table = 'about-us'
+        verbose_name = _("About Us")
+        verbose_name_plural = _("About Us")
+
+
+class SciolAboutUs(CreateAt, UpdateAt):
+    url = models.URLField(_('sciol name'), max_length=254)
+    title = models.CharField(_('title'), max_length=100)
+    is_active = models.BooleanField(_('is active'), default=True)
+    
+    def __str__(self) -> str:
+        return self.title
+    
+    class Meta:
+        db_table = 'sciol-about-us'
+        verbose_name = _("sciol")
+        verbose_name_plural = _("sciol")

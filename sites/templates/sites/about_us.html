@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% load render_partial %}
+
+{% block title %}
+<title>درباره ما</title>
+{% endblock title %}
+
+{% block content %}
+<section class="px-6 mt-4 mb-8">
+    <div class="container mx-auto max-w-screen-xl">
+      <div class="bg-white p-3 rounded-3xl mb-4">
+        <div class="text-sm breadcrumbs">
+          <ul>
+            <li><a>خانه</a></li> 
+            <li>درباره ما</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl p-6">
+        <div class="p-3 bg-stone-200 rounded-xl mb-4">
+          <h1 class="text-sm font-YekanBakh-Bold">درباره ما</h1>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-14 pt-8">
+          <div class="leading-8">
+            <h2 class="text-lg font-YekanBakh-Bold mb-4">درباره ویزیت بخوانید...</h2>
+
+            <p class='mt-4'>{{ about_us.description }}</p>
+          </div>
+          <div>
+            <img class="rounded-2xl" src="{{ about_us.image.url }}" alt="" style="height: 23rem;">
+          </div>
+        </div>
+        {% render_partial 'sites.views.SciolAboutUsView' %}
+      </div>
+    </div>
+  </section>
+{% endblock content %}

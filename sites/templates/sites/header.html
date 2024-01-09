@@ -35,9 +35,8 @@
                         <li><a class="hover:text-indigo-600" href="{% url "doctor:home" %}">صفحه اصلی</a></li>
                         <li><a class="hover:text-indigo-600" href="reservationlist.html">لیست پزشکان</a></li>
                         <li><a class="hover:text-indigo-600" href="reservation.html">رزرو نوبت</a></li>
-                        <li><a class="hover:text-indigo-600" href="bimeh.html">ثبت بیمه</a></li>
                         <li><a class="hover:text-indigo-600" href="{% url "blog:all_posts" %}">وبلاگ</a></li>
-                        <li><a class="hover:text-indigo-600" href="about-us.html">درباره ما</a></li>
+                        <li><a class="hover:text-indigo-600" href="{% url "sites:about_us" %}">درباره ما</a></li>
                         <li><a class="hover:text-indigo-600" href="{% url "sites:contact_us" %}">تماس با ما</a></li>
 
                     </ul>
@@ -53,16 +52,15 @@
                     <li><a class="hover:text-indigo-600" href="{% url "doctor:home" %}">صفحه اصلی</a></li>
                     <li><a class="hover:text-indigo-600" href="{% url "doctor:all_doctor" %}">لیست پزشکان</a></li>
                     <li><a class="hover:text-indigo-600" href="reservation.html">رزرو نوبت</a></li>
-                    <li><a class="hover:text-indigo-600" href="bimeh.html">ثبت بیمه</a></li>
                     <li><a class="hover:text-indigo-600" href="{% url "blog:all_posts" %}">وبلاگ</a></li>
-                    <li><a class="hover:text-indigo-600" href="about-us.html">درباره ما</a></li>
+                    <li><a class="hover:text-indigo-600" href="{% url "sites:about_us" %}">درباره ما</a></li>
                     <li><a class="hover:text-indigo-600" href="{% url "sites:contact_us" %}">تماس با ما</a></li>
                 </ul>
             </div>
           </div>
             <div class="border rounded-lg">
                 {% if request.user.is_authenticated %}
-                <a href="#" class="flex py-2.5 px-5 rounded-lg hover:text-white hover:bg-stone-800 hover:transition hover:duration-700 hover:ease-in-out">سلام {{ request.user }}</a>
+                <a href="{% url "accounts:profile" request.user.id %}" class="flex py-2.5 px-5 rounded-lg hover:text-white hover:bg-stone-800 hover:transition hover:duration-700 hover:ease-in-out">سلام {{ request.user }}</a>
                 {% else %}
                 <a href="{% url "accounts:login" %}" class="flex py-2.5 px-5 rounded-lg hover:text-white hover:bg-stone-800 hover:transition hover:duration-700 hover:ease-in-out">ورود | ثبت نام</a>
                 {% endif %}

@@ -19,13 +19,13 @@
                     <li><a href="{% url "doctor:all_doctor" %}">لیست پزشکان</a></li>
                     <li><a href="reservation.html">رزرو نوبت</a></li>
                     <li><a href="{% url "sites:contact_us" %}">تماس با ما</a></li>
-                    <li><a href="blog.html">وبلاگ</a></li>
+                    <li><a href="{% url "blog:all_posts" %}">وبلاگ</a></li>
                 </ul>
             </div>
             <div class="col-span-6 lg:col-span-2 text-right">
                 <h3 class="font-YekanBakh-Bold text-white mb-4 text-lg">خدمات ویزیت</h3>
                 <ul>
-                    <li><a href="about-us.html">درباره ما</a></li>
+                    <li><a href="{% url "sites:about_us" %}">درباره ما</a></li>
                     <li><a href="question.html">سوالات متداول</a></li>
                     <li><a href="single-blog.html">صفحه داخلی بلاگ</a></li>
                     {% if request.user.is_authenticated %}
@@ -39,20 +39,17 @@
             <div class="col-span-6 lg:col-span-2 text-right">
               <h3 class="font-YekanBakh-Bold text-white mb-4 text-lg">دسترسی سریع</h3>
               <ul>
-                  <li><a href="lost-password.html">فراموشی رمز عبور</a></li>
-                  <li><a href="bimeh.html">ثبت بیمه</a></li>
-                  <li><a href="successful.html">ثبت موفق</a></li>
-                  <li><a href="unsuccessful.html">ثبت ناموفق</a></li>
+                  <li><a href="{% url "accounts:reset_password" %}">فراموشی رمز عبور</a></li>
               </ul>
           </div>
           <div class="col-span-6 lg:col-span-2 text-right">
-              <h3 class="font-YekanBakh-Bold text-white mb-4 text-lg">خدمات ویزیت</h3>
+              <h3 class="font-YekanBakh-Bold text-white mb-4 text-lg">خدمات</h3>
               <ul>
                   <li><a href="download.html">دانلودها</a></li>
                   <li><a href="invoices.html">صورتحساب ها</a></li>
                   <li><a href="reviews.html">نظرات</a></li>
                   <li><a href="chat.html">پیام ها</a></li>
-                  <li><a href="edit-account.html">جزئیات حساب کاربری</a></li>
+                  <li><a href="{% url "accounts:profile" request.user.id%}">جزئیات حساب کاربری</a></li>
                   <li><a href="{% url "doctor:signup_doctor" %}">همکاری با مجموعه</a></li>
               </ul>
           </div>
