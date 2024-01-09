@@ -1,0 +1,123 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>دکترها</title>
+{% endblock title %}
+
+{% block content %}
+<div class="grid grid-cols-12 gap-4">
+  <div class="col-span-12 lg:col-span-9 lg:order-2">
+      <div class="flex flex-col gap-4">
+          {% for all_doctor in doctor %}
+          <div class="bg-white p-8 rounded-3xl">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <div class="flex items-center mb-8 lg:mb-0">
+                    <div class="avatar online">
+                        <div class="w-20 rounded-full">
+                          <img src="{{ all_doctor.image.url }}">
+                        </div>
+                      </div>
+                      <div class="mr-4">
+                      <h3 class="font-YekanBakh-ExtraBold text-base mb-2">{{ all_doctor.user.get_full_name }}</h3> 
+                      <p class="text-gray-500">{% for s in all_doctor.skill.all %}{{ s }}{% if not forloop.last %},{% endif %}{% endfor %}</p>
+                      </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-yellow-500 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd"></path>
+                          </svg>
+                          <span class="font-YekanBakh-SemiBold">4.8</span>
+                    </div>
+                    <div class="text-green-500 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"></path>
+                          </svg>
+                        <span class="font-YekanBakh-SemiBold">96 درصد پیشنهاد</span>                                  
+                    </div>
+                    <span class="font-YekanBakh-SemiBold">2733 نظر</span>
+                </div>
+            </div>
+            <div class="bg-gray-50 leading-8 p-4 my-6 rounded-2xl">
+                <div class="flex flex-col md:flex-row items-center">
+                    <span class="text-sm font-YekanBakh-Bold">خدمات:</span>
+                    <div class="mr-1">{% for s in all_doctor.skill.all %}{{ s }}{% if not forloop.last  %},{% endif %}{% endfor %}</div>
+                </div>
+                <div class="flex gap-8">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75v-4.5m0 4.5h4.5m-4.5 0l6-6m-3 18c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 014.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 00-.38 1.21 12.035 12.035 0 007.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 011.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 01-2.25 2.25h-2.25z"></path>
+                        </svg>                                      
+                        <div class="mr-1">مشاوره تلفنی</div>
+                    </div>
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"></path>
+                          </svg>                                                                      
+                        <div class="mr-1">مشاوره متنی</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row leading-8 items-center justify-between">
+                <div class="flex flex-col md:flex-row items-center mb-6 md:mb-0">
+                    <span class="text-sm font-YekanBakh-Bold">آدرس:</span>
+                    <div class="mr-1">{{ all_doctor.address_doctor }}</div>
+                </div>
+                <div>
+                    <a href="reservation.html" class="bg-indigo-600 hover:bg-indigo-700 hover:transition hover:duration-700 p-6 py-2 text-center rounded-xl text-white">دریافت مشاوره</a>
+                </div>
+            </div>
+
+        </div>
+          {% endfor %}
+
+      </div>
+  </div>
+  <div class="col-span-12 lg:col-span-3 lg:order-1">
+    <div class="bg-white p-4 rounded-3xl mb-4 leading-8 sticky top-0">
+      <div class="p-3 bg-stone-200 rounded-xl mb-4">
+        <h1 class="text-sm font-YekanBakh-Bold">جستجو پیشرفته</h1>
+      </div>
+        <div>
+          <label class="label">
+            <span class="label-text-alt">نام پزشک:</span>
+          </label>
+          <input type="text" placeholder="نام متخصص" class="input input-bordered w-full rounded-xl placeholder:text-xs">   
+          <label class="label">
+            <span class="label-text-alt">تخصص و فوق تخصص:</span>
+          </label>
+          <input type="text" placeholder="تخصص" class="input input-bordered w-full rounded-xl placeholder:text-xs"> 
+          <label class="label">
+            <span class="label-text-alt">استان:</span>
+          </label>
+          <select class="select select-bordered w-full pr-3">
+            <option selected="">تهران</option>
+            <option>اصفهان</option>
+            <option>شیراز</option>
+            <option>گیلان</option>
+            <option>کرج</option>
+          </select>
+          <label class="label">
+            <span class="label-text-alt">جنسیت:</span>
+          </label>
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text">خانم</span> 
+              <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked="">
+            </label>
+          </div>
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text">آقا</span> 
+              <input type="radio" name="radio-10" class="radio checked:bg-blue-500">
+            </label>
+          </div>
+          <button class="btn bg-stone-800 w-full hover:bg-stone-900 text-white my-3">جستجو</button> 
+        </div>
+        
+    </div>
+</div>
+</div>
+{% endblock content %}
