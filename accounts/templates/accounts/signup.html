@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block title %}
+<title>ساخت حساب</title>
+{% endblock title %}
+
+{% block content %}
+<section class="h-screen px-4 flex items-center">
+    <div class="container mx-auto max-w-screen-lg">
+        <div class="bg-white rounded-2xl overflow-hidden">
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="flex-1 p-8 md:p-4 lg:p-20 lg:pb-0">
+                    <form action="" method='post'>
+                        {% csrf_token %}
+                        <h2 class="text-3xl font-YekanBakh-ExtraBlack my-4">ثبت نام</h2>
+                        {{ form }}
+                        <input type='submit' value='ثبت نام' class='btn bg-stone-800 hover:bg-stone-900 text-white w-full my-4'>
+                    </form>
+                    <p class="text-center my-4">قبلا ثبت نام کرده اید؟ <a href="{% url "accounts:login" %}">وارد شوید</a></p>
+                </div>
+                <div class="hidden md:block">
+                    <img class="bg-cover" src="/static/images/login.jpg" alt="" style="width: 18rem; height: 40rem;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

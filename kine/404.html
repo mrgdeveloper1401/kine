@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>404</title>
+{% endblock title %}
+
+{% block content %}
+<section class="h-screen px-4 flex items-center">
+    <div class="container mx-auto max-w-screen-sm text-center leading-10">
+        <img class="w-3/4 mb-16 mx-auto" src="/static/images/404.png" alt="404 not found">
+        <p class="text-2xl font-YekanBakh-Bold mb-4">اوه، صفحــه مورد نظر یافــت نشد!!</p>
+        <a class="bg-indigo-600 text-white py-2 px-6 rounded-xl" href="index.html">برو به صفحه اصلی</a>
+    </div>
+</section>
+{% endblock content %}
