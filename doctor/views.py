@@ -10,9 +10,6 @@ from .models import Doctor
 class HomeComponents(TemplateView):
     template_name = 'doctor/home.html'
 
-class LatestComponenets(TemplateView):
-    template_name = 'doctor/latest_doctor.html'
-
 
 class SignUpDoctorView(LoginRequiredMixin, View):
     from_class = SignUpDoctorForm
@@ -35,3 +32,15 @@ class All_doctor(View):
     def get(self, request, *args, **kwargs):
         doctor = get_list_or_404(Doctor, is_active=True)
         return render(request, 'doctor/all_doctor.html', {'doctor': doctor})
+
+
+class DoctorSlider(View):
+    def get(self, request, *args, **kwargs):
+        doctor = get_list_or_404(Doctor, is_active=True)[:10]
+        return render(request, 'doctor/doctor_slider.html', {'doctor': doctor})
+    
+
+class LatesDoctor(View):
+    def get(self, request, *args, **kwargs):
+        latest_doctor = get_list_or_404(Doctor, is_active=True)[:4]
+        return render(request, 'doctor/latest_doctor.html', {'latest_doctor': latest_doctor})

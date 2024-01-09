@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.views import View
+from django.views.generic import TemplateView
 from django.contrib import messages
 from .form import FeedbackForm
 from .models import Feedback, SiteSettings, PermisionSite
@@ -59,3 +60,9 @@ class WaysOfComunicarion(View):
     def get(self, request, *args, **kwargs):
         woc = get_object_or_404(SiteSettings, is_main_setting=True)
         return render(request, 'sites/woc.html', {'woc': woc})
+
+
+
+class SliderComponenets(TemplateView):
+    template_name = 'sites/slider.html'
+    

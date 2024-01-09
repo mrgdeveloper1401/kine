@@ -13,6 +13,7 @@ class DoctorAdmin(admin.ModelAdmin):
     list_filter = ('create_at', 'update_at', 'is_active')
     list_editable = ('is_active', 'status')
     filter_horizontal = ('skill',)
+    search_fields = ('user',)
     
     def skill_doctor(self, obj):
         return ','.join([s.skill_name for s in obj.skill.all()])

@@ -17,6 +17,7 @@ class NewsLater(CreateAt):
 
 class Post(CreateAt, UpdateAt):
     title = models.CharField(_('Title'), max_length=254, unique=True)
+    short_description = models.TextField(_('short description'), blank=True, null=True)
     slug = models.SlugField(max_length=254, unique=True, allow_unicode=True)
     image = models.ImageField(_('Image'), upload_to='blog/%Y/%M/%d', width_field='', height_field='')
     width_image = models.PositiveIntegerField(blank=True, null=True)
@@ -24,7 +25,7 @@ class Post(CreateAt, UpdateAt):
     body = models.TextField()
     user = models.ForeignKey('accounts.Users', on_delete=models.PROTECT, related_name='posts')
     is_active = models.BooleanField(default=False)
-    short_description = models.TextField(_('tiny description'), blank=True, null=True)
+   
     
     def __str__(self) -> str:
         return f'{self.title} -- {self.short_description}'
