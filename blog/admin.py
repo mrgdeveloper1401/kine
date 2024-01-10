@@ -9,7 +9,7 @@ class PostAdmin(admin.ModelAdmin):
         ('category',
          {'fields': ('category', 'user')}),
         ('add posts',
-         {'fields': ('title', 'slug', 'short_description', 'body', 'image', 'is_active')})
+         {'fields': ('title', 'slug', 'short_description', 'body', 'image', 'is_active', 'create_at', 'update_at')})
     ]
     list_display = ('title', 'user', 'is_active', 'create_at')
     list_editable = ('is_active', )
@@ -20,6 +20,7 @@ class PostAdmin(admin.ModelAdmin):
     raw_id_fields = ('user',)
     search_fields = ('title',)
     filter_horizontal = ('category',)
+    readonly_fields = ('create_at', 'update_at')
 
 
 @admin.register(CategoryBlog)

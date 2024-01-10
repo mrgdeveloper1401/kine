@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_render_partial',
     'sorl.thumbnail',
+    'django_jalali',
     
     # create app
     'common.apps.CommonConfig',
