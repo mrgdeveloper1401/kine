@@ -25,8 +25,11 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(CategoryBlog)
 class CategoryBlogAdmin(admin.ModelAdmin):
-    list_display =('title', 'parent', 'is_active')
+    list_display = ('title', 'parent', 'is_active',)
+    list_filter = (
+        ('create_at', JDateFieldListFilter),
+        ('update_at', JDateFieldListFilter),
+        'is_active'
+    )
     list_editable = ('is_active',)
-    list_per_page = 20
-    search_fields = ('title',)
     date_hierarchy = 'create_at'

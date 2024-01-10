@@ -1,0 +1,17 @@
+<div class="bg-white p-4 rounded-2xl mb-4 leading-8">
+      <ul class="menu">
+        {% for main in category %}
+          <li>
+            <details close="">
+              <summary>{{ main.title }}</summary>
+              <ul>
+                {% for sub in main.children.all %}
+                <li><a>{{ sub.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </details>
+          </li>
+          {% endfor %}
+        </ul>
+      
+  </div>

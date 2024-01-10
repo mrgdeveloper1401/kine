@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'django_jalali',
     'kine',
+    'mptt',
     
     # create app
     'common.apps.CommonConfig',
