@@ -11,7 +11,7 @@ class AllPostBlog(ListView):
     template_name = 'blog/all_post_blog.html'
     paginate_by = 20
     context_object_name = 'all_post_blog'
-    paginate_by = 10
+    paginate_by = 1
     queryset = Post.objects.filter(is_active=True)
 
 

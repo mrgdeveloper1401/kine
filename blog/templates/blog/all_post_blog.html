@@ -1,5 +1,7 @@
 {% extends "base/base.html" %}
 
+{% load render_partial %}
+
 {% load static %}
 
 {% load thumbnail %}
@@ -11,14 +13,7 @@
 {% block content %}
 <section class="px-6 mt-4 mb-8">
     <div class="container mx-auto max-w-screen-xl">
-      <div class="bg-white p-3 rounded-3xl mb-4">
-        <div class="text-sm breadcrumbs">
-          <ul>
-            <li><a>خانه</a></li> 
-            <li>وبلاگ</li>
-          </ul>
-        </div>
-      </div>
+      {% render_partial 'blog.views.CategoryBlogView' %}
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {% for posts in all_post_blog %}
         <div class="bg-white p-4 rounded-2xl leading-8">
@@ -41,7 +36,7 @@
           
       </div>
 
-      <div class="flex justify-center my-12">
+      {% comment %} <div class="flex justify-center my-12">
         <div class="join">
             <button class="join-item btn">1</button>
             <button class="join-item btn">2</button>
@@ -49,7 +44,26 @@
             <button class="join-item btn">99</button>
             <button class="join-item btn">100</button>
           </div>
+      </div> {% endcomment %}
+
+      <div class="flex justify-center my-12">
+        <ul class="pagination">
+
+            {% if page_obj.has_previous %}
+                <a href='?page={{ page_obj.previous_page_number }}' class='btn'>صفحه قبلی</a>
+            {% endif %}
+
+            {% for num in paginator.page_range %}
+                <a href='?page={{ num }}' class='btn'>{{ num }}</a>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a href='?page={{ page_obj.next_page_number }}' class='btn'>صفحه بعدی</a>
+            {% endif %}
+
+        </ul>
       </div>
+
     </div>
   </section>
 {% endblock content %}
