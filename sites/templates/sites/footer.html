@@ -49,7 +49,9 @@
                   <li><a href="invoices.html">صورتحساب ها</a></li>
                   <li><a href="reviews.html">نظرات</a></li>
                   <li><a href="chat.html">پیام ها</a></li>
+                  {% if request.user.is_authenticated %}
                   <li><a href="{% url "accounts:profile" request.user.id%}">جزئیات حساب کاربری</a></li>
+                  {% endif %}
                   <li><a href="{% url "doctor:signup_doctor" %}">همکاری با مجموعه</a></li>
               </ul>
           </div>

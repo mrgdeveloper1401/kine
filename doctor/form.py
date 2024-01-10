@@ -14,9 +14,9 @@ class SignUpDoctorForm(forms.ModelForm):
         )
         
         widgets = {
-            'medical_system_code': forms.NumberInput(attrs={'class': 'input input-bordered w-full my-2'}),
-            'nation_code': forms.NumberInput(attrs={'class': 'input input-bordered w-full my-2'}),
-            'address_doctor': forms.Textarea(attrs={'class': 'input input-bordered w-full my-2'}),
+            'medical_system_code': forms.NumberInput(attrs={'class': 'input input-bordered my-2'}),
+            'nation_code': forms.NumberInput(attrs={'class': 'input input-bordered  my-2'}),
+            'address_doctor': forms.Textarea(attrs={'class': 'input input-bordered  my-2'}),
             'image': forms.FileInput(),
-            'doctor_birth_dat': forms.DateInput(attrs={'class': 'input input-bordered w-full my-2'}),
+            'doctor_birth_dat': forms.DateInput(attrs={'class': 'input input-bordered my-2'}),
         }

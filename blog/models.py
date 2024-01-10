@@ -15,9 +15,23 @@ class NewsLater(CreateAt):
         verbose_name_plural = _('News Later')
 
 
+class CategoryBlog(CreateAt, UpdateAt):
+    title = models.CharField(_('Title'), max_length=100)
+    is_active = models.BooleanField(_("فعال"), default=True)
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.PROTECT)
+    
+    def __str__(self) -> str:
+        return self.title
+    
+    class Meta:
+        db_table = 'category_blog'
+        verbose_name = _('category blog')
+        verbose_name_plural = _('category blog')
+
 class Post(CreateAt, UpdateAt):
+    category = models.ManyToManyField(CategoryBlog, related_name='category_post')
     title = models.CharField(_('Title'), max_length=254, unique=True)
-    short_description = models.TextField(_('short description'), blank=True, null=True)
+    short_description = models.CharField(_('short description'), blank=True, null=True, max_length=100)
     slug = models.SlugField(max_length=254, unique=True, allow_unicode=True)
     image = models.ImageField(_('Image'), upload_to='blog/%Y/%M/%d', width_field='', height_field='')
     width_image = models.PositiveIntegerField(blank=True, null=True)
@@ -31,6 +45,7 @@ class Post(CreateAt, UpdateAt):
         return f'{self.title} -- {self.short_description}'
     
     class Meta:
+        ordering = ('-create_at',)
         verbose_name = _('posts')
         verbose_name_plural = _('posts')
 

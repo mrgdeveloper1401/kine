@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import SiteSettings, Feedback, PermisionSite, AboutUs, SciolAboutUs
+from django_jalali.admin.filters import JDateFieldListFilter
 
 
 @admin.register(SiteSettings)
@@ -17,7 +18,7 @@ class FeedbackAdmin(admin.ModelAdmin):
 @admin.register(PermisionSite)
 class PermissionAdmin(admin.ModelAdmin):
     list_display = ('permission_url','create_at', 'update_at', 'is_active')
-    list_filter =('create_at', 'update_at', 'is_active')
+    list_filter =(('create_at', JDateFieldListFilter), ('update_at', JDateFieldListFilter), 'is_active')
     date_hierarchy = 'create_at'
 
 
@@ -31,5 +32,5 @@ class SciolAboutUs(admin.ModelAdmin):
     list_display = ('title', 'url', 'is_active')
     list_editable= ('is_active',)
     date_hierarchy = 'create_at'
-    list_filter = ('is_active', 'create_at', 'update_at')
+    list_filter = ('is_active',( 'create_at', JDateFieldListFilter), ('update_at', JDateFieldListFilter))
     

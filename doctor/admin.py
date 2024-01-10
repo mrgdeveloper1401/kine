@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Doctor, SkilDoctor
+from django_jalali.admin.filters import JDateFieldListFilter
 
 
 @admin.register(Doctor)
@@ -10,7 +11,7 @@ class DoctorAdmin(admin.ModelAdmin):
     ]
     list_display = ('user', 'medical_system_code', 'nation_code', 'doctor_birth_dat', 'is_active', 'skill_doctor', 'status')
     raw_id_fields = ('user',)
-    list_filter = ('create_at', 'update_at', 'is_active')
+    list_filter = (('create_at', JDateFieldListFilter), ('update_at', JDateFieldListFilter), 'is_active')
     list_editable = ('is_active', 'status')
     filter_horizontal = ('skill',)
     search_fields = ('user',)
@@ -23,4 +24,4 @@ class DoctorAdmin(admin.ModelAdmin):
 class SkilDoctorAdmin(admin.ModelAdmin):
     list_display = ('skill_name', 'create_at', 'update_at')
     search_fields = ('skill_name',)
-    list_filter = ('create_at', 'update_at')
+    list_filter = (('create_at,', JDateFieldListFilter), ('update_at', JDateFieldListFilter))

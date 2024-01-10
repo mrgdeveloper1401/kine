@@ -1,9 +1,9 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
+from django_jalali.db import models as jmodels
 
 class CreateAt(models.Model):
-    create_at = models.DateTimeField(auto_now_add=True, editable=False, blank=True, null=True)
+    create_at = jmodels.jDateTimeField(auto_now_add=True, editable=False, blank=True, null=True)
     
     class Meta:
         
@@ -13,7 +13,7 @@ class CreateAt(models.Model):
 
 
 class UpdateAt(models.Model):
-    update_at = models.DateTimeField(auto_now=True, editable=False, blank=True, null=True)
+    update_at = jmodels.jDateTimeField(auto_now=True, editable=False, blank=True, null=True)
     
     class Meta:
         abstract = True

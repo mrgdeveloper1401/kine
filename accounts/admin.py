@@ -5,6 +5,8 @@ from django.http.request import HttpRequest
 from .models import Users, OtpCode, UserDelete
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
+from django_jalali.admin.filters import JDateFieldListFilter
+
 
 @admin.register(Users)
 class UsersAdmin(BaseUserAdmin):
