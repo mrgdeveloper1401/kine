@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_render_partial',
     'sorl.thumbnail',
     'django_jalali',
+    'kine',
     
     # create app
     'common.apps.CommonConfig',

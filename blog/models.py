@@ -1,6 +1,8 @@
 from django.db import models
 from common.models import CreateAt, UpdateAt
 from django.utils.translation import gettext_lazy as _
+from django.db import models
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 class NewsLater(CreateAt):
@@ -15,10 +17,10 @@ class NewsLater(CreateAt):
         verbose_name_plural = _('News Later')
 
 
-class CategoryBlog(CreateAt, UpdateAt):
+class CategoryBlog(MPTTModel,CreateAt, UpdateAt):
     title = models.CharField(_('Title'), max_length=100)
     is_active = models.BooleanField(_("فعال"), default=True)
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.PROTECT)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     
     def __str__(self) -> str:
         return self.title

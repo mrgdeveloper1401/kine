@@ -30,17 +30,18 @@ class SignUpDoctorView(LoginRequiredMixin, View):
 
 class All_doctor(View):
     def get(self, request, *args, **kwargs):
-        doctor = get_list_or_404(Doctor, is_active=True)
+        doctor = Doctor.objects.filter(is_active=True)
         return render(request, 'doctor/all_doctor.html', {'doctor': doctor})
 
 
 class DoctorSlider(View):
     def get(self, request, *args, **kwargs):
         doctor = get_list_or_404(Doctor, is_active=True)[:10]
+        doctor = Doctor.objects.filter(is_active=True)[:10]
         return render(request, 'doctor/doctor_slider.html', {'doctor': doctor})
     
 
 class LatesDoctor(View):
     def get(self, request, *args, **kwargs):
-        latest_doctor = get_list_or_404(Doctor, is_active=True)[:4]
+        latest_doctor = Doctor.objects.filter(is_active=True)[:4]
         return render(request, 'doctor/latest_doctor.html', {'latest_doctor': latest_doctor})
