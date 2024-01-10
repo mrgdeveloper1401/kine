@@ -73,11 +73,11 @@ class AboutUsView(ListView):
     model = AboutUs
     template_name = 'sites/about_us.html'
     context_object_name = 'about_us'
-    queryset = get_object_or_404(AboutUs, is_active=True)
+    queryset = AboutUs.objects.filter(is_active=True)
 
 
 class SciolAboutUsView(ListView):
     model = SciolAboutUs
-    queryset = get_object_or_404(SciolAboutUs, is_active=True)
+    queryset = SciolAboutUs.objects.filter(is_active=True)
     template_name = 'sites/sciol_about_us.html'
     context_object_name = 'sciol_about_us'
