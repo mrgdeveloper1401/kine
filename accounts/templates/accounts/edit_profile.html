@@ -1,5 +1,7 @@
 {% extends "base/base.html" %}
 
+{% load thumbnail %}
+
 {% block title %}
 <title>ویرایش پروفایل</title>
 {% endblock title %}
@@ -8,15 +10,18 @@
 <div class="bg-white p-4 lg:p-8 rounded-3xl w-full">
     <div class="p-3 bg-stone-200 rounded-xl mb-4">
         <h1 class="text-sm font-YekanBakh-Bold">ویرایش حساب کاربری</h1>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <form action='' method='post'>
-          {{ form }}
-          {% csrf_token %}
-          <button type='submit' class="btn bg-stone-800 w-36 hover:bg-stone-900 text-white my-3">ذخیره تغییرات</button>
-        </form>
+            <form action='' method='post' enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                {% thumbnail request.user.image '250' crop='center' as im %}
+                  <img src="{{ im.url }}" width='{{ im.width }}' height='{{ im.height }}' alt="User Image Preview, defualt image" class="mb-4 rounded-lg">
+                {% endthumbnail %}
+                <button type='submit' class="btn bg-stone-800 w-36 hover:bg-stone-900 text-white my-3">ذخیره تغییرات</button>
+            </form>
         </div>
-      </div>
+    </div>
 </div>
 {% endblock content %}

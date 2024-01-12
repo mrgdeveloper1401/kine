@@ -1,3 +1,5 @@
+from typing import Any
+from django.http import HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.urls import reverse_lazy
 from django.views import View
@@ -148,12 +150,21 @@ class EditProfileView(LoginRequiredMixin, View):
     form_class = EditProfile
     template_name = 'accounts/edit_profile.html'
     
+    def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:
+        self.user_instance = get_object_or_404(Users, pk=kwargs['pk'])
+        return super().setup(request, *args, **kwargs)
+    
     def get(self, request, *args, **kwargs):
-        user = get_object_or_404(Users, pk=kwargs['pk'])
+        user = self.user_instance
         form = self.form_class(instance=user)
         return render(request, self.template_name, {'form': form})
     
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST, request.FILES)
-        pass
+        user = self.user_instance
+        form = self.form_class(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'successfully update profile', 'success')
+            return redirect('accounts:profile', pk=request.user.id)
+        return render(request, self.template_name, {'form': form})
         
