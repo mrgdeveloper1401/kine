@@ -7,8 +7,9 @@ from django.views.generic import ListView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import NewsLater, Post, Comment, CategoryBlog
-from .form import Commentform
+from .form import Commentform, ReplyForm
 
 
 class AllPostBlog(ListView):
@@ -22,6 +23,7 @@ class AllPostBlog(ListView):
 
 class BlogDetailsView(View):
     form_class = Commentform
+    from_class_reply = ReplyForm
     template_name = 'blog/blog_details.html'
     
     def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:
@@ -32,7 +34,8 @@ class BlogDetailsView(View):
         form = self.form_class()
         post = self.post_instance
         main_comment = Comment.objects.filter(status=True, posts_id=post.id, parent=None)
-        return render(request, self.template_name, {'details': post, 'comment': main_comment, 'form': form})
+        return render(request, self.template_name, {'details': post, 'comment': main_comment, 'form': form,
+                                                    'reply_form': self.from_class_reply})
 
     method_decorator(login_required)
     def post(self, request, *args, **kwargs):

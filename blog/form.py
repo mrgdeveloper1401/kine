@@ -21,3 +21,11 @@ class Commentform(forms.ModelForm):
         labels = {
             'body': _('متن نظر')
         }
+
+
+class ReplyForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = (
+            'body',
+        )
