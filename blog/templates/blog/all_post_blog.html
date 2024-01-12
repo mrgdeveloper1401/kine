@@ -17,7 +17,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {% for posts in all_post_blog %}
         <div class="bg-white p-4 rounded-2xl leading-8">
-            <a href="{% url "blog:blog_details" posts.slug %}"><img class="rounded-xl" src="{{ posts.image.url }}" alt=""></a>
+            <a href="{{ posts.get_absolute_url }}"><img class="rounded-xl" src="{{ posts.image.url }}" alt=""></a>
             <div class="">
               <a href="single-blog.html"><h3 class="font-YekanBakh-ExtraBold text-base mt-4 mb-2">{{ posts.title }}</h3> </a>
               <p>{{ posts.short_description }}</p>

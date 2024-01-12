@@ -1,9 +1,10 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
-from .models import NewsLater, Post, Comment, CategoryBlog
 from django.views import View
 from django.views.generic import ListView
+from .models import NewsLater, Post, Comment, CategoryBlog
+from .form import Commentform
 
 
 class AllPostBlog(ListView):
@@ -34,6 +35,18 @@ class LatestBlogPostView(View):
 
 
 class CommentPostView(View):
+    form_class = Commentform
     def get(self, request, *args, **kwargs):
-        comment = Comment.objects.filter(status='publish')[:10]
-        return render(request, 'blog/comments.html', {'comment': comment})
+        form = self.form_class()
+        return render(request, 'blog/comments.html', {'form': form})
+    
+    # def post(self, request, *args, **kwargs):
+    #     form = self.form_class(request.POST)
+    #     if form.is_valid():
+    #         cd = form.cleaned_data
+    #         Comment.objects.create(
+    #             user = request.user,
+    #             body = cd['body'],
+    #             posts = 
+    #         )
+            
