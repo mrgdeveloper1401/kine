@@ -11,54 +11,12 @@
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-            <label class="label">
-                <span class="label-text-alt">نام:</span>
-              </label>
-              <input type="text" class="input input-bordered w-full rounded-xl">
+          <form action='' method='post'>
+          {{ form }}
+          {% csrf_token %}
+          <button type='submit' class="btn bg-stone-800 w-36 hover:bg-stone-900 text-white my-3">ذخیره تغییرات</button>
+        </form>
         </div>
-        <div>
-            <label class="label">
-                <span class="label-text-alt">نام خانوادگی:</span>
-              </label>
-              <input type="text" class="input input-bordered w-full rounded-xl">
-        </div>
-        <div>
-            <label class="label">
-                <span class="label-text-alt">نام نمایشی:</span>
-              </label>
-              <input type="text" class="input input-bordered w-full rounded-xl">
-        </div>
-        <div>
-            <label class="label">
-                <span class="label-text-alt">آدرس ایمیل:</span>
-              </label>
-              <input type="email" class="input input-bordered w-full rounded-xl">
-        </div>
-        <div>
-            <label class="label">
-                <span class="label-text-alt">گذرواژه قبلی:</span>
-              </label>
-              <input type="text" class="input input-bordered w-full rounded-xl">
-        </div>
-        <div>
-            <label class="label">
-                <span class="label-text-alt">گذرواژه جدید:</span>
-              </label>
-              <input type="text" class="input input-bordered w-full rounded-xl">
-        </div>
-        <div>
-            <label class="label">
-                <span class="label-text-alt">آدرس سایت:</span>
-              </label>
-              <input type="text" class="input input-bordered w-full rounded-xl">
-        </div>
-        <div>
-            <label class="label">
-                <span class="label-text-alt">شماره موبایل:</span>
-              </label>
-              <input type="text" class="input input-bordered w-full rounded-xl">
-        </div>
-        <button class="btn bg-stone-800 w-36 hover:bg-stone-900 text-white my-3">ذخیره تغییرات</button>
       </div>
 </div>
 {% endblock content %}

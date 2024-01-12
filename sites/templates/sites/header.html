@@ -38,6 +38,9 @@
                         <li><a class="hover:text-indigo-600" href="{% url "blog:all_posts" %}">وبلاگ</a></li>
                         <li><a class="hover:text-indigo-600" href="{% url "sites:about_us" %}">درباره ما</a></li>
                         <li><a class="hover:text-indigo-600" href="{% url "sites:contact_us" %}">تماس با ما</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a class="hover:text-indigo-600" href="{% url 'accounts:logout' %}">خروج از حساب</a></li>
+                        {% endif %}
 
                     </ul>
                   </div>
@@ -55,6 +58,9 @@
                     <li><a class="hover:text-indigo-600" href="{% url "blog:all_posts" %}">وبلاگ</a></li>
                     <li><a class="hover:text-indigo-600" href="{% url "sites:about_us" %}">درباره ما</a></li>
                     <li><a class="hover:text-indigo-600" href="{% url "sites:contact_us" %}">تماس با ما</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a class="hover:text-indigo-600" href="{% url 'accounts:logout' %}">خروج از حساب</a></li>
+                    {% endif %}
                 </ul>
             </div>
           </div>

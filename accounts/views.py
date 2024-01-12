@@ -10,7 +10,7 @@ from django.utils.crypto import get_random_string
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from random import randint
 from .models import Users, OtpCode
-from .form import SignUpForm, LoginForm, AcceptCodeForm, PasswordResetForms
+from .form import SignUpForm, LoginForm, AcceptCodeForm, PasswordResetForms, EditProfile
 from kine.utils import send_code_email
 
 
@@ -142,3 +142,18 @@ class ProfileView(View):
     def get(self, request, *args, **kwargs):
         profile = get_object_or_404(Users, pk=kwargs['pk'])
         return render(request, 'accounts/profile.html', {'profile': profile})
+
+
+class EditProfileView(LoginRequiredMixin, View):
+    form_class = EditProfile
+    template_name = 'accounts/edit_profile.html'
+    
+    def get(self, request, *args, **kwargs):
+        user = get_object_or_404(Users, pk=kwargs['pk'])
+        form = self.form_class(instance=user)
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        pass
+        

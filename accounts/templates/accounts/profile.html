@@ -13,7 +13,7 @@
                     <div class="text-center absolute right-[6.3rem]">
                         <div class="avatar online mt-8">
                             <div class="w-24 rounded-full">
-                              <img src="../assets/images/avatar-3.jpg">
+                              <img src="{{ profile.image.url }}">
                             </div>
                           </div>
                            
@@ -128,7 +128,9 @@
                         </label>
                         <strong>{{ profile.last_login }}</strong>
                       </div>
-                    <button class="btn bg-stone-800 w-36 hover:bg-stone-900 text-white my-3">ویرایش اطلاعات</button>
+                    {% if request.user.is_authenticated %}
+                    <a href='{% url "accounts:edit_profile" request.user.id %}' class="btn bg-stone-800 w-36 hover:bg-stone-900 text-white my-3">ویرایش اطلاعات</a>
+                    {% endif %}
                   </div>
                   <div>
                     <label class="label">

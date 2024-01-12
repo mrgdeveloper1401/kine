@@ -12,7 +12,7 @@ from django_jalali.admin.filters import JDateFieldListFilter
 class UsersAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {"fields": ("username", "password")}),
-        (_("Personal info"), {"fields": ("first_name", "last_name", "email")}),
+        (_("Personal info"), {"fields": ("first_name", "last_name", "email", 'about_us', 'image')}),
         (
             _("Permissions"),
             {
