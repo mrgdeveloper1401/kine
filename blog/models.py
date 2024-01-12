@@ -3,7 +3,11 @@ from django.urls import reverse_lazy
 from common.models import CreateAt, UpdateAt
 from django.utils.translation import gettext_lazy as _
 from django.db import models
+from django.core.validators import MinLengthValidator
+from django.template.defaultfilters import truncatewords
 from .managers import ActivePost
+from .validators import unicode_validator
+
 
 
 class NewsLater(CreateAt):
@@ -34,7 +38,7 @@ class CategoryBlog(CreateAt, UpdateAt):
 class Post(CreateAt, UpdateAt):
     category = models.ManyToManyField(CategoryBlog, related_name='category_post')
     title = models.CharField(_('Title'), max_length=254, unique=True)
-    short_description = models.CharField(_('short description'), max_length=50)
+    en_title = models.CharField(_('en Title'), max_length=254, unique=True, validators=(unicode_validator, MinLengthValidator(20)))
     slug = models.SlugField(max_length=254, unique=True, allow_unicode=True)
     image = models.ImageField(_('Image'), upload_to='blog/%Y/%M/%d', width_field='', height_field='')
     width_image = models.PositiveIntegerField(blank=True, null=True)
@@ -49,14 +53,12 @@ class Post(CreateAt, UpdateAt):
     def get_absolute_url(self):
         return reverse_lazy("blog:blog_details", kwargs={"slug": self.slug, 'pk': self.pk})
     
-
     def categories(self):
         return '->'.join([c.title for c in self.category.all()])
-
-
     
     def __str__(self) -> str:
-        return f'{self.title} -- {self.short_description}'
+        truncate_body = truncatewords(self.body, 10)
+        return f'{self.title} -- {truncate_body}'
     
     class Meta:
         ordering = ('-create_at',)
@@ -66,20 +68,20 @@ class Post(CreateAt, UpdateAt):
 
 class Comment(CreateAt):
     user = models.ForeignKey('accounts.Users', on_delete=models.PROTECT, related_name='user_comments')
-    posts = models.ForeignKey(Post, on_delete=models.PROTECT, related_name='post_comments')
+    posts = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_comments')
     body = models.TextField(_('text comment'))
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='parent_comment', null=True, blank=True)
-    
-    class StatusComment(models.TextChoices):
-        publish = 'published'
-        rejected = 'rejected'
-        draft = 'draft'
-    status = models.CharField(_('Status'), max_length=9, choices=StatusComment.choices, blank=True, null=True)
+    status = models.BooleanField(_("وضعیت کامنت"), default=False)
     
     def __str__(self) -> str:
         return self.body
+    
+    @property
+    def comment_count(self) -> int:
+        return self.post_comments.count
 
     class Meta:
+        ordering = ('-create_at',)
         db_table = 'comment'
         verbose_name = _('comment')
         verbose_name_plural = _('comments')

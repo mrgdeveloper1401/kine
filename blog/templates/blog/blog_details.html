@@ -35,7 +35,39 @@
         <p class="mt-4">
             {{ details.body }}
         </p>
-        {% render_partial 'blog.views.CommentPostView' %}
+
+        <div class="mt-4">
+            <form method='post' action=''>
+                    <h3 class="font-YekanBakh-Bold text-slate-800 text-base">نظرات</h3>
+                    {% csrf_token %}
+                    {{ form }}
+                    <button class="btn bg-stone-800 hover:bg-stone-900 text-white rounded-2xl">ارسال پیام</button>
+            </form>
+        </div>
+        
+        <div class='rounded-xl mb-4 p-4 mt-3 bg-dark text-white'>
+            {% for c in comment %}
+                <p class='mt-5'>نام کاربر: {{ c.user }}</p>
+                <p>متن کامنت: {{ c.body }}</p>
+                <span>تاریخ ایجاد نظر: {{ c.create_at | jformat:"%Y/%m/%d" }}</span> </br>
+                <span>ساعت: {{ c.create_at | jformat:"%H:%M" }}</span> </br>
+                <button class="btn bg-stone-800 hover:bg-stone-900 text-white rounded-2xl">پاسخ</button>
+
+                {% with reply=c.parent_comment.all %}
+                    {% for reply_comment in reply %}
+                        <div style="padding: 0 1rem; margin: 0 2rem;">
+                            <p class='mt-5'>نام کاربر پاسخ دهنده: {{ reply_comment.user }}</p>
+                            <p>متن پاسخ کامنت: {{ reply_comment.body }}</p>
+                            <span>تاریخ ایجاد نظر: {{ reply_comment.create_at | jformat:"%Y/%m/%d" }}</span> </br>
+                            <span>ساعت: {{ reply_comment.create_at | jformat:"%H:%M" }}</span> </br>
+                            <button class="btn bg-stone-800 hover:bg-stone-900 text-white rounded-2xl">پاسخ</button>
+                        </div>
+                    {% endfor %}
+                {% endwith %}
+            {% empty %}
+                <p class='text-sm rounded-xl mb-4 p-4 mt-3'>هنوز هیچ کامنتی در اینجا ایجاد نشده هست</p>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock content %}
