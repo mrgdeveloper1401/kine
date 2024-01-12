@@ -1,6 +1,8 @@
+{% for sciol in sciol_about_us %}
 <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-8 rounded-2xl mt-16">
     <div class="flex flex-col sm:flex-row justify-between items-center">
-        <div class="text-white font-YekanBakh-ExtraBold text-lg">ما را در {{ sciol_about_us.title }} دنبال کنید...</div>
-        <a href="{{ sciol_about_us.url }}"><div class="bg-white py-2 px-8 rounded-lg font-YekanBakh-ExtraBold text-lg">rtl-theme</div></a>
+        <div class="text-white font-YekanBakh-ExtraBold text-lg">ما را در {{ sciol.title }} دنبال کنید...</div>
+        <a href="{{ sciol.url }}"><div class="bg-white py-2 px-8 rounded-lg font-YekanBakh-ExtraBold text-lg">وارد شدن به {{ sciol.title }}</div></a>
     </div>
 </div>
+{% endfor %}

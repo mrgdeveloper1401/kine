@@ -67,7 +67,7 @@ class AboutUs(CreateAt, UpdateAt):
 
 
 class SciolAboutUs(CreateAt, UpdateAt):
-    url = models.URLField(_('sciol name'), max_length=254)
+    url = models.URLField(_('sciol name url'), max_length=254)
     title = models.CharField(_('title'), max_length=100)
     is_active = models.BooleanField(_('is active'), default=True)
     
