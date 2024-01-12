@@ -19,8 +19,8 @@
         <div class="bg-white p-4 rounded-2xl leading-8">
             <a href="{% url "blog:blog_details" posts.slug %}"><img class="rounded-xl" src="{{ posts.image.url }}" alt=""></a>
             <div class="">
-              <a href="single-blog.html"><h3 class="font-YekanBakh-ExtraBold text-base mt-4 mb-2">{{ posts.en_title }}</h3> </a>
-              <p>{{ posts.title }}</p>
+              <a href="single-blog.html"><h3 class="font-YekanBakh-ExtraBold text-base mt-4 mb-2">{{ posts.title }}</h3> </a>
+              <p>{{ posts.short_description }}</p>
             </div>
             <div class="flex items-center justify-between border-t border-dashed pt-4 mt-4">
               <div>{{ posts.create_at }}</div>

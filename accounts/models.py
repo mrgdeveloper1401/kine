@@ -21,6 +21,7 @@ class Users(AbstractBaseUser, PermissionsMixin, UpdateAt, CreateAt):
     image = models.ImageField(_('image'), upload_to='images/user/%Y/%M/%d', width_field='width_image', height_field='height_image', blank=True, null=True)
     width_image = models.IntegerField(_('width'), blank=True, null=True)
     height_image = models.IntegerField(_('height'), blank=True, null=True)
+    about_us = models.TextField(_('about us'), blank=True, null=True)
     
     username_validator = UnicodeUsernameValidator()
     

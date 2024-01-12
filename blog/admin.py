@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, CategoryBlog, NewsLater
+from .models import Post, CategoryBlog, NewsLater, Comment
 from django_jalali.admin.filters import JDateFieldListFilter
 
 
@@ -33,3 +33,15 @@ class CategoryBlogAdmin(admin.ModelAdmin):
     )
     list_editable = ('is_active',)
     date_hierarchy = 'create_at'
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'post', 'status', 'body')
+    list_filter = ('create_at', 'status')
+    list_per_page = 30
+    search_fields = ('body',)
+    list_editable = ('body',)
+    date_hierarchy = 'create_at'
+    raw_id_fields = ('user', 'posts')
+    
