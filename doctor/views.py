@@ -45,3 +45,8 @@ class LatesDoctor(View):
     def get(self, request, *args, **kwargs):
         latest_doctor = Doctor.objects.filter(is_active=True)[:4]
         return render(request, 'doctor/latest_doctor.html', {'latest_doctor': latest_doctor})
+
+
+class AdvanceSearchDoctorView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'doctor/advance_search_doctor.html')

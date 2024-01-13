@@ -11,9 +11,13 @@ class PostAdmin(admin.ModelAdmin):
         ('add posts',
          {'fields': ('title', 'en_title', 'slug', 'body', 'image', 'is_active', 'create_at', 'update_at')})
     ]
-    list_display = ('title', 'en_title', 'user', 'is_active', 'create_at', 'id')
+    list_display = ('title', 'en_title', 'show_category', 'user', 'is_active', 'create_at', 'id')
     list_editable = ('is_active', )
-    list_filter = ('is_active', 'create_at', 'update_at')
+    list_filter = (
+        ('create_at', JDateFieldListFilter),
+        ('update_at', JDateFieldListFilter),
+        'is_active'
+    )
     date_hierarchy = 'create_at'
     list_per_page = 20
     prepopulated_fields = {'slug': ('en_title', )}
@@ -21,11 +25,14 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     filter_horizontal = ('category',)
     readonly_fields = ('create_at', 'update_at')
+    
+    def show_category(self, obj):
+        return ','.join([c.title for c in obj.category.all()])
 
 
 @admin.register(CategoryBlog)
 class CategoryBlogAdmin(admin.ModelAdmin):
-    list_display = ('title', 'parent', 'is_active',)
+    list_display = ('title', 'parent', 'is_active', 'slug', 'id')
     list_filter = (
         ('create_at', JDateFieldListFilter),
         ('update_at', JDateFieldListFilter),
@@ -33,12 +40,13 @@ class CategoryBlogAdmin(admin.ModelAdmin):
     )
     list_editable = ('is_active',)
     date_hierarchy = 'create_at'
+    prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('user', 'post', 'status', 'body', 'parent', 'id')
-    list_filter = ('create_at', 'status')
+    list_filter = (('create_at', JDateFieldListFilter), 'status')
     list_per_page = 30
     search_fields = ('body',)
     list_editable = ('body',)

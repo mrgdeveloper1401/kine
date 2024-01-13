@@ -24,6 +24,7 @@ class NewsLater(CreateAt):
 
 class CategoryBlog(CreateAt, UpdateAt):
     title = models.CharField(_('Title'), max_length=100)
+    slug = models.SlugField(_('Slug'), max_length=100, blank=True, null=True, unique=True, allow_unicode=True)
     is_active = models.BooleanField(_("فعال"), default=True)
     parent = models.ForeignKey('self', on_delete=models.PROTECT, null=True, blank=True, related_name='children')
     
