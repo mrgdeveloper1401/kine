@@ -13,7 +13,9 @@
                     <div class="text-center absolute right-[6.3rem]">
                         <div class="avatar online mt-8">
                             <div class="w-24 rounded-full">
-                              <img src="{{ profile.image.url }}">
+                                {% if profile.image %}
+                                    <img src="{{ profile.image.url }}">
+                                {% endif %}
                             </div>
                           </div>
                            

@@ -9,12 +9,12 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.utils.crypto import get_random_string
-from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
+    PasswordResetCompleteView
 from random import randint
 from .models import Users, OtpCode
 from .form import SignUpForm, LoginForm, AcceptCodeForm, PasswordResetForms, EditProfile
 from kine.utils import send_code_email
-
 
 
 class UserSignupView(View):
@@ -29,7 +29,7 @@ class UserSignupView(View):
     def get(self, request):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
-    
+
     def setup(self, request, *args, **kwargs):
         self.next = request.GET.get('next')
         return super().setup(request, *args, **kwargs)
@@ -51,15 +51,14 @@ class UserSignupView(View):
         return render(request, self.template_name, {'form': form})
 
 
-
 class AcceptCodeView(View):
     form_class = AcceptCodeForm
     template_name = 'accounts/accept_code.html'
-    
+
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
-    
+
     def post(self, request, *args, **kwargs):
         user_session = request.session['user_signup_info']
         otp_code = OtpCode.objects.get(email=user_session['email'])
@@ -85,16 +84,16 @@ class AcceptCodeView(View):
 class LoginViews(View):
     form_class = LoginForm
     template_name = 'accounts/login.html'
-    
+
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('accounts:profile', request.user.id)
         return super().dispatch(request, *args, **kwargs)
-    
+
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
-    
+
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -126,19 +125,18 @@ class UserPasswordResetView(PasswordResetView):
     form_class = PasswordResetForms
 
 
-
 class UserPasswordResetDoneView(PasswordResetDoneView):
-	template_name = 'accounts/password_reset_done.html'
+    template_name = 'accounts/password_reset_done.html'
 
 
 class UserPasswordResetConfirmView(PasswordResetConfirmView):
-	template_name = 'accounts/password_reset_confirm.html'
-	success_url = reverse_lazy('accounts:password_reset_complete')
+    template_name = 'accounts/password_reset_confirm.html'
+    success_url = reverse_lazy('accounts:password_reset_complete')
 
 
 class UserPasswordResetCompleteView(PasswordResetCompleteView):
-	template_name = 'accounts/password_reset_complete.html'
- 
+    template_name = 'accounts/password_reset_complete.html'
+
 
 class ProfileView(View):
     def get(self, request, *args, **kwargs):
@@ -149,16 +147,16 @@ class ProfileView(View):
 class EditProfileView(LoginRequiredMixin, View):
     form_class = EditProfile
     template_name = 'accounts/edit_profile.html'
-    
+
     def setup(self, request: HttpRequest, *args: Any, **kwargs: Any) -> None:
         self.user_instance = get_object_or_404(Users, pk=kwargs['pk'])
         return super().setup(request, *args, **kwargs)
-    
+
     def get(self, request, *args, **kwargs):
         user = self.user_instance
         form = self.form_class(instance=user)
         return render(request, self.template_name, {'form': form})
-    
+
     def post(self, request, *args, **kwargs):
         user = self.user_instance
         form = self.form_class(request.POST, request.FILES, instance=user)
@@ -167,4 +165,3 @@ class EditProfileView(LoginRequiredMixin, View):
             messages.success(request, 'successfully update profile', 'success')
             return redirect('accounts:profile', pk=request.user.id)
         return render(request, self.template_name, {'form': form})
-        
