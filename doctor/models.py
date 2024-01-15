@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import truncatewords
 from common.models import CreateAt, UpdateAt
 from django.utils.translation import gettext_lazy as _
 
@@ -15,6 +16,7 @@ class Doctor(CreateAt, UpdateAt):
     is_active = models.BooleanField(_('Is Active'), default=False)
     reply_to = models.TextField(_('Reply to'), null=True, blank=True)
     skill = models.ManyToManyField('SkilDoctor', related_name='doctors')
+    about_us_doctor = models.TextField(_('about us doctor'), null=True, blank=True)
     
     class Status(models.TextChoices):
         reject = 'rejected'
@@ -94,3 +96,33 @@ class Faq(CreateAt, UpdateAt):
         db_table = 'faqs'
         verbose_name = 'faq'
         verbose_name_plural = 'faqs'
+
+
+class QuestionDoctor(CreateAt):
+    full_name = models.CharField(_('full name'), max_length=50)
+    title = models.CharField(_('title'), max_length=100)
+    body = models.TextField(_('body'))
+    is_active = models.BooleanField(_('active'), default=False)
+
+    def __str__(self):
+        return self.title
+
+    class Mata:
+        db_table = 'question_doctor'
+        verbose_name = 'question doctor'
+        verbose_name_plural = 'question doctor'
+
+
+class AnswerDoctor(CreateAt, UpdateAt):
+    question = models.ForeignKey(QuestionDoctor, on_delete=models.CASCADE, related_name='question')
+    body = models.TextField(_('body'))
+    is_active = models.BooleanField(_('active'), default=False)
+
+    def __str__(self):
+        body_truncate = truncatewords(self.body, 30)
+        return f'{self.question.full_name} -- {body_truncate}'
+
+    class Meta:
+        db_table = 'answer_doctor'
+        verbose_name = 'answer doctor'
+        verbose_name_plural = 'answer doctor'

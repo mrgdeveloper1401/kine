@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .form import SignUpDoctorForm
 from .models import Doctor
-    
+
 
 class HomeComponents(TemplateView):
     template_name = 'doctor/home.html'
@@ -14,15 +14,15 @@ class HomeComponents(TemplateView):
 class SignUpDoctorView(LoginRequiredMixin, View):
     from_class = SignUpDoctorForm
     template_name = 'doctor/signup_doctor.html'
-    
+
     def get(self, request, *args, **kwargs):
         form = self.from_class()
         return render(request, self.template_name, {'form': form})
-    
+
     def post(self, request, *args, **kwargs):
         form = self.from_class(request.POST, request.FILES)
         if form.is_valid():
-            Doctor.objects.create(user = request.user, **form.cleaned_data)
+            Doctor.objects.create(user=request.user, **form.cleaned_data)
             messages.success(request, 'send information about you we called', 'success')
             return redirect('accounts:profile', request.user.id)
         return render(request, self.template_name, {'form': form})
@@ -39,7 +39,7 @@ class DoctorSlider(View):
         doctor = get_list_or_404(Doctor, is_active=True)[:10]
         doctor = Doctor.objects.filter(is_active=True)[:10]
         return render(request, 'doctor/doctor_slider.html', {'doctor': doctor})
-    
+
 
 class LatesDoctor(View):
     def get(self, request, *args, **kwargs):
@@ -50,3 +50,11 @@ class LatesDoctor(View):
 class AdvanceSearchDoctorView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'doctor/advance_search_doctor.html')
+
+
+class AppointmentDoctorView(View):
+    template_name = 'doctor/details_doctor.html'
+
+    def get(self, request, *args, **kwargs):
+        details = Doctor.objects.get(id=kwargs['doctor_id'])
+        return render(request, self.template_name, {'details': details})

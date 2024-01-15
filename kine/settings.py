@@ -54,8 +54,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'doctor.apps.DoctorConfig',
     'blog.apps.BlogConfig',
-    'invioces.apps.InviocesConfig',
     'sites.apps.SitesConfig',
+    "orders.apps.OrdersConfig"
 ]
 
 MIDDLEWARE = [
