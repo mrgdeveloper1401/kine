@@ -1,5 +1,5 @@
 from typing import Any
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic import ListView
@@ -10,18 +10,16 @@ from .models import Post, Comment, CategoryBlog
 from .form import Commentform, ReplyForm
 
 
-class AllPostBlog(ListView):
-    model = Post
+class AllPostBlog(View):
     template_name = 'blog/all_post_blog.html'
-    context_object_name = 'all_post_blog'
-    paginate_by = 20
-    queryset = model.objects.filter(is_active=True)
 
-    # def get_queryset(self):
-    #     category_id = self.kwargs.get('category_id')
-    #     if category_id:
-    #         return Post.objects.filter(category_id=category_id, is_active=True)
-    #     return Post.objects.filter(is_active=True)
+    def get(self, request: HttpRequest, category_slug=None):
+        posts = Post.objects.filter(is_active=True)
+        category = CategoryBlog.objects.filter(is_active=True, parent=None)
+        if category_slug:
+            cat = CategoryBlog.objects.get(slug=category_slug)
+            posts = posts.filter(category=cat)
+        return render(request, self.template_name, {'all_post_blog': posts, 'category': category})
 
 
 class BlogDetailsView(View):
@@ -52,13 +50,6 @@ class BlogDetailsView(View):
             messages.success(request, 'نظر شما با موفقیت ثبت شد بعد از تایید ان به نمایش در خواهد آمد', 'success')
             return redirect('blog:blog_details', pk=kwargs['pk'], slug=kwargs['slug'])
         return render(request, self.template_name, {'form': form})
-
-
-class CategoryBlogView(ListView):
-    model = CategoryBlog
-    template_name = 'blog/category_blog.html'
-    context_object_name = 'category'
-    queryset = model.objects.filter(is_active=True, parent=None)
 
 
 class LatestBlogPostView(ListView):

@@ -56,8 +56,9 @@
                 <p>متن کامنت: {{ c.body }}</p>
                 <span>تاریخ ایجاد نظر: {{ c.create_at | jformat:"%Y/%m/%d" }}</span> </br>
                 <span>ساعت: {{ c.create_at | jformat:"%H:%M" }}</span> </br>
-                <button class="btn bg-stone-800 hover:bg-stone-900 text-white rounded-2xl">پاسخ</button>
-
+                {% if request.user.is_superuser %}
+                    <button class="btn bg-stone-800 hover:bg-stone-900 text-white rounded-2xl">پاسخ</button>
+                {% endif %}
                 {% with reply=c.parent_comment.all %}
                     {% for reply_comment in reply %}
                         <div style="padding: 0 1rem; margin: 0 2rem;">

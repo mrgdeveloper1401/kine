@@ -1,4 +1,3 @@
-from django.db import models
 from django.urls import reverse_lazy
 from common.models import CreateAt, UpdateAt
 from django.utils.translation import gettext_lazy as _
@@ -29,6 +28,9 @@ class CategoryBlog(CreateAt, UpdateAt):
 
     def __str__(self) -> str:
         return self.title
+
+    def get_absolute_url(self):
+        return reverse_lazy('blog:post_by_category', args=[self.slug])
 
     class Meta:
         db_table = 'category_blog'

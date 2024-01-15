@@ -14,18 +14,37 @@
 
 {% block content %}
 <section class="px-6 mt-4 mb-8">
+
     <div class="container mx-auto max-w-screen-xl">
-      {% render_partial 'blog.views.CategoryBlogView' %}
+        {# category #}
+        <div class="bg-white p-4 rounded-2xl mb-4 leading-8">
+              <ul class="menu">
+                {% for main in category %}
+                  <li>
+                    <details close="">
+                      <summary>{{ main.title }}</summary>
+                      <ul style="margin-right: 2rem;">
+                        {% for sub in main.children.all %}
+                        <li><a href="{{ sub.get_absolute_url }}">{{ sub.title }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </details>
+                  </li>
+                  {% endfor %}
+                </ul>
+        </div>
+        {#  end category  #}
+
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {% for posts in all_post_blog %}
+        {% for p in all_post_blog %}
         <div class="bg-white p-4 rounded-2xl leading-8">
-            <a href="{{ posts.get_absolute_url }}"><img class="rounded-xl" src="{{ posts.image.url }}" alt=""></a>
+            <a href="{{ p.get_absolute_url }}"><img class="rounded-xl" src="{{ p.image.url }}" alt=""></a>
             <div class="">
-              <a href="single-blog.html"><h3 class="font-YekanBakh-ExtraBold text-base mt-4 mb-2">{{ posts.title }}</h3> </a>
+              <a href="{{ p.get_absolute_url }}"><h3 class="font-YekanBakh-ExtraBold text-base mt-4 mb-2">{{ p.title }}</h3> </a>
               <p>{{ posts.body | truncatewords:20 }}</p>
             </div>
             <div class="flex items-center justify-between border-t border-dashed pt-4 mt-4">
-              <div>{{ posts.create_at | jformat:"%Y/%m/%d && %H:%M" }}</div>
+              <div>{{ p.create_at | jformat:"%Y/%m/%d && %H:%M" }}</div>
               <div><a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"></path>
               </svg>
@@ -35,18 +54,7 @@
           {% empty %}
             <p>هنوز پستی به این جا اضافه نشده هست</p>
           {% endfor %}
-          
       </div>
-
-      {% comment %} <div class="flex justify-center my-12">
-        <div class="join">
-            <button class="join-item btn">1</button>
-            <button class="join-item btn">2</button>
-            <button class="join-item btn btn-disabled">...</button>
-            <button class="join-item btn">99</button>
-            <button class="join-item btn">100</button>
-          </div>
-      </div> {% endcomment %}
 
       <div class="flex justify-center my-12">
         <ul class="pagination">
