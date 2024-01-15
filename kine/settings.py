@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'kine',
     'mptt',
     'storages',
+    'django_celery_beat',
 
     # create app
     'common.apps.CommonConfig',

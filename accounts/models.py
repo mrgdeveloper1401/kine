@@ -18,13 +18,14 @@ class Users(AbstractBaseUser, PermissionsMixin, UpdateAt, CreateAt):
     is_deleted = models.BooleanField(_('delete user'), editable=False, default=False)
     deleted_at = models.DateTimeField(_('deleted at'), editable=False, blank=True, null=True)
     random_active_code = models.CharField(_('random active code'), max_length=72, blank=True, null=True, editable=False)
-    image = models.ImageField(_('image'), upload_to='images/user/%Y/%M/%d', width_field='width_image', height_field='height_image', blank=True, null=True)
+    image = models.ImageField(_('image'), upload_to='images/user/%Y/%M/%d', width_field='width_image',
+                              height_field='height_image', blank=True, null=True)
     width_image = models.IntegerField(_('width'), blank=True, null=True)
     height_image = models.IntegerField(_('height'), blank=True, null=True)
     about_us = models.TextField(_('about us'), blank=True, null=True)
-    
+
     username_validator = UnicodeUsernameValidator()
-    
+
     username = models.CharField(
         _("username"),
         max_length=150,
@@ -40,18 +41,17 @@ class Users(AbstractBaseUser, PermissionsMixin, UpdateAt, CreateAt):
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
-    
+
     objects = UserManager()
     soft_delete_manager = SoftDeleteManager()
-    
+
     def __str__(self) -> str:
         return self.get_full_name()
-    
+
     class Meta:
         verbose_name = _("user")
         verbose_name_plural = _("users")
-    
-    
+
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
@@ -81,10 +81,10 @@ class UserDelete(Users):
 class Notofication(CreateAt):
     title = models.CharField(_('Title'), max_length=100)
     body = models.TextField(_('Body'))
-    
+
     def __str__(self) -> str:
         return self.title
-    
+
     class Meta:
         db_table = 'notifications'
         verbose_name = 'notification'
@@ -93,11 +93,11 @@ class Notofication(CreateAt):
 
 class OtpCode(CreateAt):
     code = models.PositiveIntegerField()
-    email = models.EmailField(_('Email'))
-    
+    email = models.EmailField(_('Email'), unique=True)
+
     def __str__(self) -> str:
         return f'{self.code} - {self.email} - {self.create_at}'
-    
+
     class Meta:
         db_table = 'otp_codes'
         verbose_name = 'otp code'

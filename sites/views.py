@@ -8,16 +8,16 @@ from .form import FeedbackForm
 from .models import Feedback, SiteSettings, PermisionSite, AboutUs, SciolAboutUs
 
 
-
 class contactUsView(View):
     template_name = 'sites/contact_us.html'
+
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
 
 
 class HeaderComponenets(View):
     template_name = 'sites/header.html'
-    
+
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
 
@@ -32,11 +32,11 @@ class FooterComponents(View):
 class FeedbackView(View):
     form_class = FeedbackForm
     template_name = 'sites/feedback.html'
-    
+
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
-    
+
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -64,7 +64,6 @@ class WaysOfComunicarion(View):
         return render(request, 'sites/woc.html', {'woc': woc})
 
 
-
 class SliderComponenets(TemplateView):
     template_name = 'sites/slider.html'
 
@@ -81,3 +80,11 @@ class SciolAboutUsView(ListView):
     queryset = SciolAboutUs.objects.filter(is_active=True)
     template_name = 'sites/sciol_about_us.html'
     context_object_name = 'sciol_about_us'
+
+
+# TODO
+class BucketView(View):
+    templte_name = 'sites/bucket.html'
+
+    def get(self, request, *args, **kwargs):
+        pass
