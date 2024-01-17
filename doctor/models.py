@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import truncatewords
+from django_jalali.db import models as jalali_models
 from common.models import CreateAt, UpdateAt
 from django.utils.translation import gettext_lazy as _
 
@@ -12,7 +13,8 @@ class Doctor(CreateAt, UpdateAt):
     image = models.ImageField(_('Image'), upload_to='doctors/%Y/%M/%d', width_field='with_image', height_field='height_image')
     with_image = models.PositiveIntegerField(editable=False, blank=True, null=True)
     height_image = models.PositiveIntegerField(editable=False, blank=True, null=True)
-    doctor_birth_dat = models.DateField(_('Date of Birth'), null=True, blank=True)
+    doctor_birth_dat = models.DateField(_('Date of Birth milady'), null=True, blank=True)
+    doctor_date_shamsi = jalali_models.jDateField(_('Date of Shamsi'), blank=True, null=True)
     is_active = models.BooleanField(_('Is Active'), default=False)
     reply_to = models.TextField(_('Reply to'), null=True, blank=True)
     skill = models.ManyToManyField('SkilDoctor', related_name='doctors')

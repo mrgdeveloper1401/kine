@@ -6,7 +6,7 @@ from django_jalali.admin.filters import JDateFieldListFilter
 @admin.register(Doctor)
 class DoctorAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('doctor_information', {'fields': ('user', 'medical_system_code', 'nation_code', 'doctor_birth_dat', 'skill',
+        ('doctor_information', {'fields': ('user', 'medical_system_code', 'nation_code', 'doctor_birth_dat', 'doctor_date_shamsi', 'skill',
                                            'is_active', 'address_doctor', 'image', 'about_us_doctor')}),
         ('reply_to_doctor', {'fields': ('status', "reply_to",)}) 
     ]
