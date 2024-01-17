@@ -65,3 +65,10 @@ class CardAppointmentView(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
+
+
+class DetailsQuestionDoctorView(View):
+    template_name = 'doctor/details_question_doctor.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
