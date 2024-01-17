@@ -58,3 +58,10 @@ class AppointmentDoctorView(View):
     def get(self, request, *args, **kwargs):
         details = Doctor.objects.get(id=kwargs['doctor_id'])
         return render(request, self.template_name, {'details': details})
+
+
+class CardAppointmentView(View):
+    template_name = 'doctor/card_appointment.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
