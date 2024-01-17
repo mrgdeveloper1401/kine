@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'doctor.apps.DoctorConfig',
     'blog.apps.BlogConfig',
     'sites.apps.SitesConfig',
-    "orders.apps.OrdersConfig"
+    # "orders.apps.OrdersConfig"
 ]
 
 MIDDLEWARE = [

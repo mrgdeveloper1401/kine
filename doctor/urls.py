@@ -10,5 +10,5 @@ urlpatterns = [
     # path('doctor_slider/', DoctorSlider.as_view(), name='doctor_slider'),
     path('latest_doctor', LatesDoctor.as_view(), name='latest_doctor'),
     # path('advance_search_doctor/', AdvanceSearchDoctorView.as_view(), name='advance_search_doctor'),
-    path('details_doctor/<int:doctor_id>/', AppointmentDoctorView.as_view(), name='details_doctor'),
+    path('details_doctor/<int:doctor_id>/', AppointmentDoctorView.as_view(), name='order_details_doctor'),
 ]
