@@ -101,6 +101,7 @@ class Faq(CreateAt, UpdateAt):
 
 
 class QuestionDoctor(CreateAt):
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='question_doctor')
     first_name = models.CharField(_('full name'), max_length=50)
     last_name = models.CharField(_('last name'), max_length=50)
     title = models.CharField(_('title'), max_length=100)

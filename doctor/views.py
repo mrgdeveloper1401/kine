@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .form import SignUpDoctorForm, QuestionDoctorForm
-from .models import Doctor, CardAppointmentDoctor
+from .models import Doctor, CardAppointmentDoctor, QuestionDoctor
 
 
 class HomeComponents(TemplateView):
@@ -74,4 +74,12 @@ class DetailsQuestionDoctorView(View):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            QuestionDoctor.objects.create(**form.cleaned_data)
+            messages.success(request, 'سوال شما با موفقیت ساخته شد و پس از تایید به مایش در خواهد آمد', 'success')
+            return redirect('doctor:order_details_doctor', pk=kwargs['pk'])
         return render(request, self.template_name, {'form': form})
