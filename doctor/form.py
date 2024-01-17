@@ -31,5 +31,5 @@ class QuestionDoctorForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'input input-bordered w-full rounded-xl'}),
             'last_name': forms.TextInput(attrs={'class': 'input input-bordered w-full rounded-xl'}),
             'title': forms.TextInput(attrs={'class': 'input input-bordered w-full rounded-xl'}),
-            'body': forms.Textarea(attrs={'class': 'label-text-alt'})
+            'body': forms.Textarea(attrs={'class': 'textarea textarea-bordered w-full h-24 rounded-xl'})
         }
