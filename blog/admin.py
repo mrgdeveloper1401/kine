@@ -45,12 +45,10 @@ class CategoryBlogAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'post', 'status', 'body', 'parent', 'id')
+    list_display = ('user', 'posts', 'status', 'body', 'parent', 'id')
     list_filter = (('create_at', JDateFieldListFilter), 'status')
     list_per_page = 30
     search_fields = ('body',)
-    list_editable = ('body',)
     date_hierarchy = 'create_at'
     raw_id_fields = ('user', 'posts')
     list_editable = ('status',)
-    

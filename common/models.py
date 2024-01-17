@@ -6,7 +6,7 @@ class CreateAt(models.Model):
     create_at = jmodels.jDateTimeField(auto_now_add=True, editable=False, blank=True, null=True)
     
     class Meta:
-        
+        abstract = True
         db_table = 'create_at'
         verbose_name = _('create_at')
         verbose_name_plural = _('create_at')

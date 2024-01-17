@@ -43,6 +43,7 @@ class Feedback(CreateAt):
 class PermisionSite(CreateAt, UpdateAt):
     permission_url = models.URLField(_("url"), max_length=200)
     image = models.ImageField(_("image"), upload_to='site/permissions/%Y/%M/%d')
+    description = models.TextField(_("Description"), blank=True, null=True)
     is_active  = models.BooleanField(_("is_active"), default=True)
     
     class Meta:
