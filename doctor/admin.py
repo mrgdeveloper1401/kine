@@ -32,7 +32,7 @@ class SkilDoctorAdmin(admin.ModelAdmin):
 
 @admin.register(QuestionDoctor)
 class QuestionDoctorAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'title', 'is_active', 'body')
+    list_display = ('first_name', 'last_name', 'title', 'is_active', 'body')
     list_filter = ('is_active', 'create_at', )
     list_per_page = 20
     search_fields = ('body',)

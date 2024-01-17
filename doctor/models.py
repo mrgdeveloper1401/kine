@@ -101,7 +101,8 @@ class Faq(CreateAt, UpdateAt):
 
 
 class QuestionDoctor(CreateAt):
-    full_name = models.CharField(_('full name'), max_length=50)
+    first_name = models.CharField(_('full name'), max_length=50)
+    last_name = models.CharField(_('last name'), max_length=50)
     title = models.CharField(_('title'), max_length=100)
     body = models.TextField(_('body'))
     is_active = models.BooleanField(_('active'), default=False)

@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .form import SignUpDoctorForm
+from .form import SignUpDoctorForm, QuestionDoctorForm
 from .models import Doctor, CardAppointmentDoctor
 
 
@@ -70,6 +70,8 @@ class CardAppointmentView(View):
 
 class DetailsQuestionDoctorView(View):
     template_name = 'doctor/details_question_doctor.html'
+    form_class = QuestionDoctorForm
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name,)
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
