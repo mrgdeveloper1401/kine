@@ -130,24 +130,9 @@ class AnswerDoctor(CreateAt, UpdateAt):
         verbose_name_plural = 'answer doctor'
 
 
-class CardAppointment(CreateAt, UpdateAt):
-    user = models.ForeignKey('accounts.Users', on_delete=models.CASCADE, related_name='appointments_user')
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='appointments_doctor')
-    from_time = jalali_models.jDateTimeField(_('from time'), blank=True, null=True)
-    at_time = jalali_models.jDateTimeField(_('at time'), blank=True, null=True)
-    status = models.BooleanField(_('status'), default=False)
-    cancel_description = models.TextField(_('cancel description'), blank=True, null=True)
-
-    def __str__(self):
-        return f'{self.user.get_full_name()} -- {self.doctor.user.get_full_name} -- {self.from_time} -- {self.at_time}'
-
-    class Meta:
-        db_table = 'card_appointment'
-        verbose_name = 'card_appointment'
-        verbose_name_plural = 'card_appointments'
-
-
 class CardAppointmentDoctor(CreateAt, UpdateAt):
+    user = models.ForeignKey('accounts.Users', on_delete=models.CASCADE, related_name='appointments', blank=True,
+                             null=True)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='appointments_doctor_admin')
     from_time = jalali_models.jDateTimeField(_('from time'), unique=True)
     at_time = jalali_models.jDateTimeField(_('at time'), unique=True)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Doctor, SkilDoctor, QuestionDoctor, AnswerDoctor, CardAppointment, CardAppointmentDoctor
+from .models import Doctor, SkilDoctor, QuestionDoctor, AnswerDoctor, CardAppointmentDoctor
 from django_jalali.admin.filters import JDateFieldListFilter
 
 
@@ -49,17 +49,17 @@ class AnswerDoctorAdmin(admin.ModelAdmin):
     list_editable = ('is_active', )
 
 
-@admin.register(CardAppointment)
-class CardAppointmentAdmin(admin.ModelAdmin):
-    raw_id_fields = ('user', 'doctor')
-    list_display = ('user', 'doctor', 'from_time', 'at_time', 'status')
-    list_filter = ('status', 'at_time', 'from_time', 'create_at', 'update_at')
+# @admin.register(CardAppointment)
+# class CardAppointmentAdmin(admin.ModelAdmin):
+#     raw_id_fields = ('user', 'doctor')
+#     list_display = ('user', 'doctor', 'from_time', 'at_time', 'status')
+#     list_filter = ('status', 'at_time', 'from_time', 'create_at', 'update_at')
 
 
 @admin.register(CardAppointmentDoctor)
 class CardAppointmentAdminAdmin(admin.ModelAdmin):
-    list_display = ('doctor', 'from_time', 'at_time', 'status')
-    raw_id_fields = ('doctor',)
+    list_display = ('user', 'doctor', 'from_time', 'at_time', 'status')
+    raw_id_fields = ('doctor', 'user')
     list_filter = ('create_at', 'update_at', 'status')
     search_fields = ('doctor',)
     list_per_page = 20

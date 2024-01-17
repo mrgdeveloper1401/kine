@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .form import SignUpDoctorForm
-from .models import Doctor
+from .models import Doctor, CardAppointmentDoctor
 
 
 class HomeComponents(TemplateView):
@@ -64,11 +64,12 @@ class CardAppointmentView(View):
     template_name = 'doctor/card_appointment.html'
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+        appointments_user = CardAppointmentDoctor.objects.filter(status=True)
+        return render(request, self.template_name, {'appointments_user': appointments_user})
 
 
 class DetailsQuestionDoctorView(View):
     template_name = 'doctor/details_question_doctor.html'
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+        return render(request, self.template_name,)
