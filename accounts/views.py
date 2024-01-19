@@ -5,10 +5,8 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.utils.crypto import get_random_string
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
     PasswordResetCompleteView
 from random import randint

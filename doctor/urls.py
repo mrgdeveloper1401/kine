@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import  HomeComponents, SignUpDoctorView, All_doctor \
-    ,DoctorSlider, LatesDoctor, AdvanceSearchDoctorView, AppointmentDoctorView
+    ,DoctorSlider, LatesDoctor, AdvanceSearchDoctorView, AppointmentDoctorView, DetailsQuestionDoctorView
 
 app_name = 'doctor'
 urlpatterns = [

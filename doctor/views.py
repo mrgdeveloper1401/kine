@@ -79,7 +79,7 @@ class DetailsQuestionDoctorView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            QuestionDoctor.objects.create(**form.cleaned_data)
+            form.save()
             messages.success(request, 'سوال شما با موفقیت ساخته شد و پس از تایید به مایش در خواهد آمد', 'success')
-            return redirect('doctor:order_details_doctor', pk=kwargs['pk'])
+            return redirect('doctor:home')
         return render(request, self.template_name, {'form': form})
