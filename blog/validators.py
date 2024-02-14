@@ -4,7 +4,7 @@ from django.core.validators import RegexValidator
 
 
 unicode_validator = RegexValidator(
-    regex=r'^[a-zA-Z\-\_\s]+$',
+    regex=r'^[a-zA-Z\-\_\s\.]+$',
     message='please enter unicode characters',
     code='invalid characters',
 )
